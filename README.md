@@ -1,6 +1,6 @@
 # mimic-cxr-jpg-loader
 
-mimic-cxr-jpg-loader is a Python package that provides utilities to easily load the MIMIC-CXR-JPG Dataset [[1]](#1),[[2]](#2) which is available on Physionet [[3]](#3). This dataset contains chest X-ray images in JPG format from the MIMIC-CXR dataset, which is a large publicly available dataset of chest radiographs in DICOM format.
+mimic-cxr-jpg-loader is a Python package that provides utilities to easily load the MIMIC-CXR-JPG Dataset [[1]](#1), [[2]](#2) which is available on Physionet [[3]](#3). This dataset contains chest X-ray images in JPG format from the MIMIC-CXR dataset, which is a large publicly available dataset of chest radiographs in DICOM format.
 
 ## Installation
 
@@ -38,9 +38,12 @@ If you encounter any issues or have suggestions, please feel free to [open an is
 
 ## References
 
-[1] Johnson, A., Lungren, M., Peng, Y., Lu, Z., Mark, R., Berkowitz, S., & Horng, S. (2024). MIMIC-CXR-JPG - chest radiographs with structured labels (version 2.1.0). PhysioNet. https://doi.org/10.13026/jsn5-t979.
+<a id="1">[1]</a> 
+Johnson, A., Lungren, M., Peng, Y., Lu, Z., Mark, R., Berkowitz, S., & Horng, S. (2024). MIMIC-CXR-JPG - chest radiographs with structured labels (version 2.1.0). PhysioNet. https://doi.org/10.13026/jsn5-t979.
 Additionally, please cite the original publication:
 
-[2] Johnson AE, Pollard TJ, Berkowitz S, Greenbaum NR, Lungren MP, Deng CY, Mark RG, Horng S. MIMIC-CXR: A large publicly available database of labeled chest radiographs. arXiv preprint arXiv:1901.07042. 2019 Jan 21.
+<a id="2">[2]</a> 
+Johnson AE, Pollard TJ, Berkowitz S, Greenbaum NR, Lungren MP, Deng CY, Mark RG, Horng S. MIMIC-CXR: A large publicly available database of labeled chest radiographs. arXiv preprint arXiv:1901.07042. 2019 Jan 21.
 
-[3] Goldberger, A., Amaral, L., Glass, L., Hausdorff, J., Ivanov, P. C., Mark, R., ... & Stanley, H. E. (2000). PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals. Circulation [Online]. 101 (23), pp. e215–e220
+<a id="3">[3]</a> 
+Goldberger, A., Amaral, L., Glass, L., Hausdorff, J., Ivanov, P. C., Mark, R., ... & Stanley, H. E. (2000). PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals. Circulation [Online]. 101 (23), pp. e215–e220
