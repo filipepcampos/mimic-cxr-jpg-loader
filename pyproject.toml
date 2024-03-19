@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mimic_cxr_jpg_loader"
-version = "0.0.1"
+version = "0.0.5"
 authors = [
   { name="Filipe Campos", email="filipepcampos24@gmail.com" },
 ]
@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/filipepcampos/mimic_cxr_jpg_loader"
-Issues = "https://github.com/filipepcampos/mimic_cxr_jpg_loader/issues"
+Homepage = "https://github.com/filipepcampos/mimic-cxr-jpg-loader"
+Issues = "https://github.com/filipepcampos/mimic-cxr-jpg-loader/issues"
