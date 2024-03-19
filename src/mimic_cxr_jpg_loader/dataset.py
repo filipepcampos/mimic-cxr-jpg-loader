@@ -13,16 +13,12 @@ class MIMIC_Dataset:
 
         labels = self.get_labels()
 
+        labels = labels.set_index("dicom_id")
+
         for modifier in modifiers:
             labels = modifier.apply(labels)
 
-        labels["Cardiomegaly"] = labels["Cardiomegaly"].map(
-            lambda x: 2 if x < 0  else x
-        )
-
-        labels = labels.set_index("dicom_id")
         labels["Path"] = labels.apply(self.get_path, axis=1)
-        labels = labels[labels['Cardiomegaly']!=2]
 
         self.labels = labels
 

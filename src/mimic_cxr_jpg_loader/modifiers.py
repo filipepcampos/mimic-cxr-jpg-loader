@@ -38,7 +38,7 @@ class Split(Enum):
 
 
 class FilterBySplit(Modifier):
-    def __init__(self, split: str):
+    def __init__(self, split: Split):
         self.split = split
 
     def apply(self, labels: pd.DataFrame, **kwargs) -> pd.DataFrame:
@@ -65,11 +65,9 @@ class Pathology(Enum):
 
 
 class BinarizePathology(Modifier):
-    def __init__(self, condition: str):
-        self.condition = condition
+    def __init__(self, pathology: Pathology):
+        self.pathology = pathology.value
 
     def apply(self, labels: pd.DataFrame, **kwargs) -> pd.DataFrame:
-        labels[self.condition] = labels[self.condition].map(
-            lambda x: 2 if x < 0 or math.isnan(x) else x
-        )
-        return labels[labels[self.condition] != 2]
+        labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if x < 0 else x)
+        return labels[labels[self.pathology] != 2]
