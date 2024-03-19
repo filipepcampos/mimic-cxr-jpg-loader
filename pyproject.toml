@@ -4,11 +4,11 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mimic_cxr_jpg_loader"
-version = "0.0.2"
+version = "0.0.1"
 authors = [
   { name="Filipe Campos", email="filipepcampos24@gmail.com" },
 ]
-description = "A package which facilitates creating and loading data from the MIMIC-CXR-JPG dataset"
+description = "A package which facilitates loading data from the MIMIC-CXR-JPG dataset"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
