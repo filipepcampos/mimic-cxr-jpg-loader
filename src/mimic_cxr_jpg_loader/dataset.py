@@ -1,13 +1,25 @@
+"""
+This module contains the MIMIC_Dataset class, which is used to load the dataset.
+"""
+
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import pandas as pd
+from PIL import Image
 
 from mimic_cxr_jpg_loader.modifiers import Modifier
 
 
-class MIMIC_Dataset:
-    def __init__(self, root: str, split_path: str, modifiers: List[Modifier] = []):
+class MIMICDataset:
+    """
+    Dataset class for MIMIC-CXR-JPG dataset.
+    Each datum is a tuple of an image and a pandas Series containing the labels.
+    """
+
+    def __init__(
+        self, root: str, split_path: str, modifiers: Optional[List[Modifier]] = None
+    ):
         self.root = Path(root)
         self.split_path = Path(split_path)
 
@@ -15,14 +27,18 @@ class MIMIC_Dataset:
 
         labels = labels.set_index("dicom_id")
 
-        for modifier in modifiers:
-            labels = modifier.apply(labels)
+        if modifiers:
+            for modifier in modifiers:
+                labels = modifier.apply(labels)
 
         labels["Path"] = labels.apply(self.get_path, axis=1)
 
         self.labels = labels
 
     def get_labels(self) -> pd.DataFrame:
+        """
+        Retrieves the labels from the metadata and chexpert csv files and merges them.
+        """
         metadata_labels = pd.read_csv(self.root / "mimic-cxr-2.0.0-metadata.csv")
         chexpert_labels = pd.read_csv(
             self.root / "mimic-cxr-2.0.0-chexpert.csv",
@@ -38,6 +54,9 @@ class MIMIC_Dataset:
         return labels
 
     def get_path(self, row: pd.Series):
+        """
+        Returns the path of the image file corresponding to the row.
+        """
         dicom_id = str(row.name)
         subject = "p" + str(int(row["subject_id"]))
         study = "s" + str(int(row["study_id"]))
@@ -48,4 +67,5 @@ class MIMIC_Dataset:
         return len(self.labels)
 
     def __getitem__(self, idx):
-        return self.labels.iloc[idx]
+        img = Image.open(idx["Path"]).convert("RGB")
+        return (img, self.labels.iloc[idx])
