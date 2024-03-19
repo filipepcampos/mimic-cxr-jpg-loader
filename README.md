@@ -12,12 +12,30 @@ pip install mimic-cxr-jpg-loader
 
 ## Usage
 
-TODO
+To use this package simply create a new Dataset by providing the required filepaths and, optionally, a list of modifiers.
+
+```python3
+from mimic_cxr_jpg_loader.dataset import MIMICDataset
+from mimic_cxr_jpg_loader.modifiers import *
+
+dataset = MIMICDataset(
+    root="/example/datasets/MIMIC-CXR-JPG",
+    split_path="/example/datasets/MIMIC-CXR-JPG/mimic-cxr-2.0.0-split.csv",
+    modifiers=[
+        FilterByViewPosition(ViewPosition.PA),
+        FilterBySplit(Split.TRAIN),
+        BinarizePathology(Pathology.CARDIOMEGALY),
+    ],
+)
+```
+
+Afterwards simply access the dataset like a regular Pytorch Dataset, e.g. `dataset[idx]` which will return a tuple in the format `(img, labels)` where img is a Pillow Image object and labels a Pandas Series object containing all data pertaining to it.
 
 ## Requirements
 
 - Python >= 3.8
 - Pandas
+- Pillow
 
 ## License
 
