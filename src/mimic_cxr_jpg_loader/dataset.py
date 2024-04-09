@@ -67,5 +67,6 @@ class MIMICDataset:
         return len(self.labels)
 
     def __getitem__(self, idx):
-        img = Image.open(idx["Path"]).convert("RGB")
-        return (img, self.labels.iloc[idx])
+	row = self.labels.iloc[idx]
+        img = Image.open(row["Path"]).convert("RGB")
+        return (img, row)

@@ -3,6 +3,7 @@ This module contains classes for filtering and modifying the labels of the MIMIC
 """
 
 from enum import Enum
+import math
 
 import pandas as pd
 
@@ -104,7 +105,7 @@ class BinarizePathology(Modifier):
         self.pathology = pathology.value
 
     def apply(self, labels: pd.DataFrame) -> pd.DataFrame:
-        labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if x < 0 else x)
+        labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if x < 0 or math.isnan(x) else x)
         return labels[labels[self.pathology] != 2]
 
     def __str__(self):
