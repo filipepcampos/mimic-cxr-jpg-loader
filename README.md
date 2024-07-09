@@ -1,6 +1,6 @@
 # mimic-cxr-jpg-loader
 
-mimic-cxr-jpg-loader is a Python package that provides utilities to easily load the MIMIC-CXR-JPG Dataset [[1]](#1), [[2]](#2) which is available on Physionet [[3]](#3). This dataset contains chest X-ray images in JPG format from the MIMIC-CXR dataset, which is a large publicly available dataset of chest radiographs in DICOM format.
+mimic-cxr-jpg-loader is a Python package that provides utilities to easily load the MIMIC-CXR-JPG Dataset [\[1\]](#1), [\[2\]](#2) which is available on Physionet [\[3\]](#3). This dataset contains chest X-ray images in JPG format from the MIMIC-CXR dataset, which is a large publicly available dataset of chest radiographs in DICOM format.
 
 ## Installation
 
@@ -11,7 +11,6 @@ pip install mimic-cxr-jpg-loader
 ```
 
 ## Usage
-
 
 To use this package, simply create a new Dataset by providing the required filepaths and, optionally, a list of modifiers.
 
@@ -32,7 +31,7 @@ dataset = MIMICDataset(
 
 Afterwards, access the dataset like a regular Pytorch Dataset, e.g. `dataset[idx]`, which will return a tuple in the format `(img, labels)` where img is a Pillow Image object and labels a Pandas Series object containing all data about it.
 
-This labels variable will include a row containing all columns existing in the [CheXpert](https://stanfordmlgroup.github.io/competitions/chexpert/)[[4]](#4) format, for instance `labels[Pathology.CARDIOMEGALY]` will return the labels for the Cardiomegaly condition. If you want only the labels of a specific condition, pass the option `target_pathology = Pathology.YOUR_DESIRED_CONDITION` to the `MIMICDataset`. 
+This labels variable will include a row containing all columns existing in the [CheXpert](https://stanfordmlgroup.github.io/competitions/chexpert/)[\[4\]](#4) format, for instance `labels[Pathology.CARDIOMEGALY]` will return the labels for the Cardiomegaly condition. If you want only the labels of a specific condition, pass the option `target_pathology = Pathology.YOUR_DESIRED_CONDITION` to the `MIMICDataset`.
 
 ### Modifiers
 
@@ -49,7 +48,7 @@ The CheXpert labelling system allows 3 possible values for different pathologies
 
 | Modifier | Description |
 | ------- | ------------ |
-| UIgnore | Ignore (remove) all images with uncertain labels (-1) | 
+| UIgnore | Ignore (remove) all images with uncertain labels (-1) |
 | UZeroes | Map all instances of the uncertain label to 0
 | UOnes | Map all instances of the uncertain label to 1
 | UMultiClass | Treat the uncertainty label as its own class with label 2 |
@@ -79,14 +78,14 @@ If you encounter any issues or have suggestions, please feel free to [open an is
 
 ## References
 
-<a id="1">[1]</a> 
+<a id="1">\[1\]</a>
 Johnson, A., Lungren, M., Peng, Y., Lu, Z., Mark, R., Berkowitz, S., & Horng, S. (2024). MIMIC-CXR-JPG - chest radiographs with structured labels (version 2.1.0). PhysioNet. https://doi.org/10.13026/jsn5-t979.
 
-<a id="2">[2]</a> 
+<a id="2">\[2\]</a>
 Johnson AE, Pollard TJ, Berkowitz S, Greenbaum NR, Lungren MP, Deng CY, Mark RG, Horng S. MIMIC-CXR: A large publicly available database of labeled chest radiographs. arXiv preprint arXiv:1901.07042. 2019 Jan 21.
 
-<a id="3">[3]</a> 
-Goldberger, A., Amaral, L., Glass, L., Hausdorff, J., Ivanov, P. C., Mark, R., ... & Stanley, H. E. (2000). PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals. Circulation [Online]. 101 (23), pp. e215–e220
+<a id="3">\[3\]</a>
+Goldberger, A., Amaral, L., Glass, L., Hausdorff, J., Ivanov, P. C., Mark, R., ... & Stanley, H. E. (2000). PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals. Circulation \[Online\]. 101 (23), pp. e215–e220
 
-<a id="4">[4]</a>
+<a id="4">\[4\]</a>
 Jeremy Irvin, Pranav Rajpurkar, Michael Ko, Yifan Yu, Silviana Ciurea-Ilcus, Christopher Chute, Henrik Marklund, Behzad Haghgoo, Robyn L. Ball, Katie S. Shpanskaya, Jayne Seekins, David A. Mong, Safwan S. Halabi, Jesse K. Sandberg, Ricky Jones, David B. Larson, Curtis P. Langlotz, Bhavik N. Patel, Matthew P. Lungren, & Andrew Y. Ng (2019). CheXpert: A Large Chest Radiograph Dataset with Uncertainty Labels and Expert Comparison. CoRR, abs/1901.07031.
