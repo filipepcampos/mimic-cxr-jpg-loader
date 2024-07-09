@@ -18,7 +18,11 @@ class MIMICDataset:
     """
 
     def __init__(
-        self, root: str, split_path: str, modifiers: Optional[List[Modifier]] = None, target_pathology: Pathology = None 
+        self,
+        root: str,
+        split_path: str,
+        modifiers: Optional[List[Modifier]] = None,
+        target_pathology: Optional[Pathology] = None,
     ):
         self.root = Path(root)
         self.split_path = Path(split_path)
@@ -47,10 +51,15 @@ class MIMICDataset:
         )
         splits = pd.read_csv(self.split_path)
         labels = metadata_labels.merge(
-            chexpert_labels, on="study_id", how="left"
+            chexpert_labels,
+            on="study_id",
+            how="left",
         ).dropna(subset=["subject_id"])
         labels = labels.merge(
-            splits, on="dicom_id", suffixes=("", "_right"), how="left"
+            splits,
+            on="dicom_id",
+            suffixes=("", "_right"),
+            how="left",
         )
         return labels
 
@@ -68,7 +77,7 @@ class MIMICDataset:
         return len(self.labels)
 
     def __getitem__(self, idx):
-	    row = self.labels.iloc[idx]
+        row = self.labels.iloc[idx]
         img = Image.open(row["Path"]).convert("RGB")
 
         if self.target_pathology:

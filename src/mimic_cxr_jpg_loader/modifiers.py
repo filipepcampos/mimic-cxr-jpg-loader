@@ -98,61 +98,72 @@ class Pathology(Enum):
 
 class UIgnore(Modifier):
     """
-    Ignore uncertain labels 
+    Ignore uncertain labels
     """
 
     def __init__(self, pathology: Pathology):
         self.pathology = pathology.value
 
     def apply(self, labels: pd.DataFrame) -> pd.DataFrame:
-        labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if x < 0 or math.isnan(x) else x)
+        labels[self.pathology] = labels[self.pathology].map(
+            lambda x: 2 if x < 0 or math.isnan(x) else x,
+        )
         return labels[labels[self.pathology] != 2]
 
     def __str__(self):
         return f"UIgnore({self.pathology})"
 
+
 class UZeroes(Modifier):
     """
-    Map all instances of uncertain label to 0 
+    Map all instances of uncertain label to 0
     """
 
     def __init__(self, pathology: Pathology):
         self.pathology = pathology.value
 
     def apply(self, labels: pd.DataFrame) -> pd.DataFrame:
-        labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if math.isnan(x) else x)
+        labels[self.pathology] = labels[self.pathology].map(
+            lambda x: 2 if math.isnan(x) else x,
+        )
         labels[self.pathology] = labels[self.pathology].map(lambda x: 0 if x < 0 else x)
         return labels[labels[self.pathology] != 2]
 
     def __str__(self):
         return f"UZeroes({self.pathology})"
 
+
 class UOnes(Modifier):
     """
-    Map all instances of uncertain label to 1 
+    Map all instances of uncertain label to 1
     """
 
     def __init__(self, pathology: Pathology):
         self.pathology = pathology.value
 
     def apply(self, labels: pd.DataFrame) -> pd.DataFrame:
-        labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if math.isnan(x) else x)
+        labels[self.pathology] = labels[self.pathology].map(
+            lambda x: 2 if math.isnan(x) else x,
+        )
         labels[self.pathology] = labels[self.pathology].map(lambda x: 1 if x < 0 else x)
         return labels[labels[self.pathology] != 2]
 
     def __str__(self):
         return f"UOnes({self.pathology})"
 
+
 class UMultiClass(Modifier):
     """
-    Map all instances of uncertain label to their own class (2) 
+    Map all instances of uncertain label to their own class (2)
     """
 
     def __init__(self, pathology: Pathology):
         self.pathology = pathology.value
 
     def apply(self, labels: pd.DataFrame) -> pd.DataFrame:
-        labels[self.pathology] = labels[self.pathology].map(lambda x: 3 if math.isnan(x) else x)
+        labels[self.pathology] = labels[self.pathology].map(
+            lambda x: 3 if math.isnan(x) else x,
+        )
         labels[self.pathology] = labels[self.pathology].map(lambda x: 2 if x < 0 else x)
         return labels[labels[self.pathology] != 3]
 
