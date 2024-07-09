@@ -31,7 +31,7 @@ dataset = MIMICDataset(
 
 Afterwards, access the dataset like a regular Pytorch Dataset, e.g. `dataset[idx]`, which will return a tuple in the format `(img, labels)` where img is a Pillow Image object and labels a Pandas Series object containing all data about it.
 
-This labels variable will include a row containing all columns existing in the [CheXpert](https://stanfordmlgroup.github.io/competitions/chexpert/)[\[4\]](#4) format, for instance `labels[Pathology.CARDIOMEGALY]` will return the labels for the Cardiomegaly condition. If you want only the labels of a specific condition, pass the option `target_pathology = Pathology.YOUR_DESIRED_CONDITION` to the `MIMICDataset`.
+This labels variable will include a row containing all columns existing in the [CheXpert](https://stanfordmlgroup.github.io/competitions/chexpert/)[\[4\]](#4) format, for instance `labels[Pathology.CARDIOMEGALY]` will return the labels for the Cardiomegaly condition. If you want only the labels of a specific condition, pass the option `target_pathology = Pathology.YOUR_DESIRED_CONDITION` to the `MIMICDataset`, in which case `labels` will correspond to a vector with numeric labels for said pathology.
 
 ### Modifiers
 
