@@ -8,7 +8,7 @@ from typing import List, Optional
 import pandas as pd
 from PIL import Image
 
-from mimic_cxr_jpg_loader.modifiers import Modifier
+from mimic_cxr_jpg_loader.modifiers import Modifier, Pathology
 
 
 class MIMICDataset:
@@ -18,10 +18,11 @@ class MIMICDataset:
     """
 
     def __init__(
-        self, root: str, split_path: str, modifiers: Optional[List[Modifier]] = None
+        self, root: str, split_path: str, modifiers: Optional[List[Modifier]] = None, target_pathology: Pathology = None 
     ):
         self.root = Path(root)
         self.split_path = Path(split_path)
+        self.target_pathology = str(target_pathology)
 
         labels = self.get_labels()
 
@@ -67,6 +68,9 @@ class MIMICDataset:
         return len(self.labels)
 
     def __getitem__(self, idx):
-	row = self.labels.iloc[idx]
+	    row = self.labels.iloc[idx]
         img = Image.open(row["Path"]).convert("RGB")
+
+        if self.target_pathology:
+            return (img, row[self.target_pathology])
         return (img, row)
