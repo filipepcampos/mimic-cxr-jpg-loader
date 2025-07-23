@@ -26,7 +26,7 @@ class MIMICDataset:
     ):
         self.root = Path(root)
         self.split_path = Path(split_path)
-        self.target_pathology = str(target_pathology)
+        self.target_pathology = str(target_pathology) if target_pathology else None
 
         labels = self.get_labels()
 
